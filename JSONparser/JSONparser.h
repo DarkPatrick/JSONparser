@@ -9,10 +9,10 @@
 
 
 namespace JSONparser {
-    /// <summary>Класс для выгрузки целиком JSON файла, его автоматического парсинга и дальнейшей работы с ним.</summary>
+    /// <summary>РљР»Р°СЃСЃ РґР»СЏ РІС‹РіСЂСѓР·РєРё С†РµР»РёРєРѕРј JSON С„Р°Р№Р»Р°, РµРіРѕ Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРѕРіРѕ РїР°СЂСЃРёРЅРіР° Рё РґР°Р»СЊРЅРµР№С€РµР№ СЂР°Р±РѕС‚С‹ СЃ РЅРёРј.</summary>
     class JsonParser {
         private:
-        /// <summary>Структура дерева для хранения идентификаторов полей JSON файла и быстрого доступа к ним.</summary>
+        /// <summary>РЎС‚СЂСѓРєС‚СѓСЂР° РґРµСЂРµРІР° РґР»СЏ С…СЂР°РЅРµРЅРёСЏ РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂРѕРІ РїРѕР»РµР№ JSON С„Р°Р№Р»Р° Рё Р±С‹СЃС‚СЂРѕРіРѕ РґРѕСЃС‚СѓРїР° Рє РЅРёРј.</summary>
         struct TreeNode {
             std::string name;
             std::vector<TreeNode> children;
@@ -21,21 +21,21 @@ namespace JSONparser {
         public:
         __declspec(dllexport) __stdcall
         JsonParser();
-        /// <summary>Создание JSON объекта из указанного файла.</summary>
+        /// <summary>РЎРѕР·РґР°РЅРёРµ JSON РѕР±СЉРµРєС‚Р° РёР· СѓРєР°Р·Р°РЅРЅРѕРіРѕ С„Р°Р№Р»Р°.</summary>
         __declspec(dllexport) __stdcall
         JsonParser(const char* file_name);
         __declspec(dllexport) __stdcall
         ~JsonParser();
-        /// <summary>Парсинг JSON строки.</summary>
-        /// <param name='str_name'>Имя переменной, содержащей JSON файла.</param>
+        /// <summary>РџР°СЂСЃРёРЅРі JSON СЃС‚СЂРѕРєРё.</summary>
+        /// <param name='str_name'>РРјСЏ РїРµСЂРµРјРµРЅРЅРѕР№, СЃРѕРґРµСЂР¶Р°С‰РµР№ JSON С„Р°Р№Р»Р°.</param>
         __declspec(dllexport)
         uint32_t __stdcall parseStringJSON(const char* str_name);
-        /// <summary>Загрузка локального JSON файла и его парсинг.</summary>
-        /// <param name='file_name'>Имя загружаемого JSON файла.</param>
+        /// <summary>Р—Р°РіСЂСѓР·РєР° Р»РѕРєР°Р»СЊРЅРѕРіРѕ JSON С„Р°Р№Р»Р° Рё РµРіРѕ РїР°СЂСЃРёРЅРі.</summary>
+        /// <param name='file_name'>РРјСЏ Р·Р°РіСЂСѓР¶Р°РµРјРѕРіРѕ JSON С„Р°Р№Р»Р°.</param>
         __declspec(dllexport)
         uint32_t __stdcall parseFileJSON(const char* file_name);
-        /// <summary>Возвращает значение поля.</summary>
-        /// <param name='path'>Полный путь в виде вектора из строковых имён полей</param>
+        /// <summary>Р’РѕР·РІСЂР°С‰Р°РµС‚ Р·РЅР°С‡РµРЅРёРµ РїРѕР»СЏ.</summary>
+        /// <param name='path'>РџРѕР»РЅС‹Р№ РїСѓС‚СЊ РІ РІРёРґРµ РІРµРєС‚РѕСЂР° РёР· СЃС‚СЂРѕРєРѕРІС‹С… РёРјС‘РЅ РїРѕР»РµР№</param>
         __declspec(dllexport)
         char* __stdcall getVal(char** path);
 
