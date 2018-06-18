@@ -24,6 +24,9 @@ namespace JSONparser {
         /// <summary>Создание JSON объекта из указанного файла.</summary>
         __declspec(dllexport) __stdcall
         JsonParser(const char* file_name);
+        /// <summary>Создание JSON объекта из указанного файла.</summary>
+        __declspec(dllexport) __stdcall
+            JsonParser(const wchar_t* file_name);
         __declspec(dllexport) __stdcall
         ~JsonParser();
         /// <summary>Парсинг JSON строки.</summary>
@@ -34,10 +37,18 @@ namespace JSONparser {
         /// <param name='file_name'>Имя загружаемого JSON файла.</param>
         __declspec(dllexport)
         uint32_t __stdcall parseFileJSON(const char* file_name);
+        /// <summary>Загрузка локального JSON файла и его парсинг.</summary>
+        /// <param name='file_name'>Имя загружаемого JSON файла.</param>
+        __declspec(dllexport)
+            uint32_t __stdcall parseFileJSON(const wchar_t* file_name);
         /// <summary>Возвращает значение поля.</summary>
         /// <param name='path'>Полный путь в виде вектора из строковых имён полей</param>
         __declspec(dllexport)
         char* __stdcall getVal(char** path);
+        /// <summary>Отображение в консоль дерева загруженного JSON файла.</summary>
+        /// <param name='start_from'>Ничего не трогать. Оставить параметры по умолчаню.</param>
+        __declspec(dllexport)
+        void __stdcall getTree(void* start_from = nullptr, int rec_lvl = 0);
 
         private:
         uint32_t addWordToTree(const std::vector<std::string> &path);

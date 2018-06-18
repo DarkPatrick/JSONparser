@@ -14,6 +14,11 @@ namespace JSONparser {
     }
 
 
+    __stdcall JsonParser::JsonParser(const wchar_t* file_name) {
+        parseFileJSON(file_name);
+    }
+
+
     __stdcall JsonParser::~JsonParser() {
     }
 
@@ -123,6 +128,26 @@ namespace JSONparser {
     }
 
 
+    uint32_t __stdcall JsonParser::parseFileJSON(const wchar_t* file_name) {
+        ifstream h_file(file_name);
+
+        if (h_file.is_open()) {
+            string whole_file = u8"";
+            string line;
+
+            while (!h_file.eof()) {
+                getline(h_file, line);
+                whole_file.append(line);
+            }
+            h_file.close();
+
+            return parseStringJSON(whole_file.c_str());
+        } else {
+            return 0;
+        }
+    }
+
+
     char* __stdcall JsonParser::getVal(char** path) {
         TreeNode *p = &name_tree;
         uint32_t find = 0;
@@ -148,6 +173,31 @@ namespace JSONparser {
         }
 
         return (find && p->children.size()) ? p->children.at(0).name.c_str() : u8"";
+    }
+
+
+    void __stdcall JsonParser::getTree(void* start_from, int rec_lvl) {
+        TreeNode *p;
+
+        if (start_from == nullptr) {
+            p = &name_tree;
+        } else {
+            p = reinterpret_cast<TreeNode*>(start_from);
+        }
+
+        for (auto &branch : p->children) {
+            if (branch.name.size()) {
+                for (auto tab = 0; tab < rec_lvl; ++tab) {
+                    std::cout << "    ";
+                }
+                std::cout << branch.name << std::endl;
+                getTree(reinterpret_cast<void*>(&branch), rec_lvl + 1);
+            }
+        }
+
+        if ((p->name.size()) && (p->children.size() == 0)) {
+            std::cout << std::endl;
+        }
     }
 
 
